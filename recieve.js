@@ -2,11 +2,14 @@ var AWS=require('aws-sdk'),
 	sqsQueueUrl = 'https://sqs.ap-northeast-1.amazonaws.com/515132164947/TestSQS',
 	sqs;
 
-AWS.config.update({region: 'ap-northeast-1'});
+AWS.config.update({
+	region: 'ap-northeast-1',
+	logger: process.stdout
+});
 
 sqs = new AWS.SQS();
 sqs.sendMessage({
-	MessageBody:'this is a test!',
+	MessageBody:'这是个测试，如果你收到这个消息，代表发送成功了。',
 	QueueUrl:sqsQueueUrl,
 	DelaySeconds:0
 },function(err,data){
